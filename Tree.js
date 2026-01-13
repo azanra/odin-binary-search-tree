@@ -69,6 +69,31 @@ class Tree {
       );
     }
   }
+
+  check(value) {
+    if (this.treeArray.includes(value)) {
+      throw new Error(
+        "Failed to insert because input already exist in the array"
+      );
+    }
+  }
+
+  insert(value) {
+    this.check(value);
+    this.insertTraverse(this.root, value);
+  }
+
+  insertTraverse(root, value) {
+    if (root === null) return new Node(value);
+
+    if (root.data > value) {
+      root.leftChildren = this.insertTraverse(root.leftChildren, value);
+    } else if (root.data < value) {
+      root.rightChildren = this.insertTraverse(root.rightChildren, value);
+    }
+
+    return root;
+  }
 }
 
 export default Tree;
