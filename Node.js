@@ -3,8 +3,8 @@ class Node {
   #rightChildren;
   #leftChildren;
 
-  constructor() {
-    this.#data = null;
+  constructor(data) {
+    this.data = data;
     this.#rightChildren = null;
     this.#leftChildren = null;
   }
