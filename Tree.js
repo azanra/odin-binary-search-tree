@@ -136,6 +136,30 @@ class Tree {
 
     throw new Error(`Value don't exist in the array!. \n`);
   }
+
+  find(value) {
+    if (this.treeArray.includes(value)) {
+      return this.findTraverse(this.root, value);
+    }
+
+    throw new Error("Can't find the value!. \n");
+  }
+
+  findTraverse(root, value) {
+    if (root === null) return root;
+
+    let pointer = root;
+
+    while (pointer.data !== value) {
+      if (pointer.data > value) {
+        pointer = pointer.leftChildren;
+      } else if (pointer.data < value) {
+        pointer = pointer.rightChildren;
+      }
+    }
+
+    return pointer;
+  }
 }
 
 export default Tree;
