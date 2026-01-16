@@ -7,3 +7,6 @@ binaryTree.prettyPrint(binaryTree.root);
 
 binaryTree.insert(32);
 binaryTree.prettyPrint(binaryTree.root);
+
+binaryTree.deleteItem(32);
+binaryTree.prettyPrint(binaryTree.root);

@@ -80,6 +80,7 @@ class Tree {
 
   insert(value) {
     this.check(value);
+    this.treeArray = [...this.treeArray, value];
     this.insertTraverse(this.root, value);
   }
 
@@ -93,6 +94,47 @@ class Tree {
     }
 
     return root;
+  }
+
+  getSuccessor(root) {
+    let currentNode = root.rightChildren;
+    while (currentNode && currentNode.leftChildren) {
+      currentNode = currentNode.leftChildren;
+    }
+
+    return currentNode;
+  }
+
+  deleteTraverse(root, value) {
+    if (root === null) return root;
+
+    if (root.data > value) {
+      root.leftChildren = this.deleteTraverse(root.leftChildren, value);
+    } else if (root.data < value) {
+      root.rightChildren = this.deleteTraverse(root.rightChildren, value);
+    } else {
+      if (root.leftChildren === null) return root.rightChildren;
+      if (root.rightChildren === null) return root.leftChildren;
+
+      const successor = this.getSuccessor(root);
+      root.data = successor.data;
+
+      root.rightChildren = this.deleteTraverse(
+        root.rightChildren,
+        successor.data
+      );
+    }
+
+    return root;
+  }
+
+  deleteItem(value) {
+    if (this.treeArray.includes(value)) {
+      this.deleteTraverse(this.root, value);
+      return;
+    }
+
+    throw new Error(`Value don't exist in the array!. \n`);
   }
 }
 
