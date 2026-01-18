@@ -32,7 +32,7 @@ class Tree {
     return this.traverseToBuild(
       uniqueAndSortedArray,
       0,
-      uniqueAndSortedArray.length - 1
+      uniqueAndSortedArray.length - 1,
     );
   }
 
@@ -55,7 +55,7 @@ class Tree {
       this.prettyPrint(
         node.rightChildren,
         `${prefix}${isLeft ? "|   " : "    "}`,
-        false
+        false,
       );
     }
 
@@ -65,7 +65,7 @@ class Tree {
       this.prettyPrint(
         node.leftChildren,
         `${prefix}${isLeft ? "    " : "|    "}`,
-        true
+        true,
       );
     }
   }
@@ -73,7 +73,7 @@ class Tree {
   check(value) {
     if (this.treeArray.includes(value)) {
       throw new Error(
-        "Failed to insert because input already exist in the array"
+        "Failed to insert because input already exist in the array",
       );
     }
   }
@@ -121,7 +121,7 @@ class Tree {
 
       root.rightChildren = this.deleteTraverse(
         root.rightChildren,
-        successor.data
+        successor.data,
       );
     }
 
@@ -188,6 +188,33 @@ class Tree {
     if (firstNode.rightChildren) currentQueue.push(firstNode.rightChildren);
 
     this.levelOrderForEachRecursion(callback, currentQueue);
+  }
+
+  preOrderForEach(callback, root) {
+    if (callback === null) throw new Error("Callback function is null!. \n");
+    if (root === null) return;
+
+    callback(root);
+    this.preOrderForEach(callback, root.leftChildren);
+    this.preOrderForEach(callback, root.rightChildren);
+  }
+
+  inOrderForEach(callback, root) {
+    if (callback === null) throw new Error("Callback function is null!. \n");
+    if (root === null) return;
+
+    this.inOrderForEach(callback, root.leftChildren);
+    callback(root);
+    this.inOrderForEach(callback, root.rightChildren);
+  }
+
+  postOrderForEach(callback, root) {
+    if (callback === null) throw new Error("Callback function is null!. \n");
+    if (root === null) return;
+
+    this.postOrderForEach(callback, root.leftChildren);
+    this.postOrderForEach(callback, root.rightChildren);
+    callback(root);
   }
 }
 

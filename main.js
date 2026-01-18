@@ -22,3 +22,12 @@ console.log("level order iteration \n");
 binaryTree.levelOrderForEachIteration(printTheNodeData);
 console.log("level order recursion \n");
 binaryTree.levelOrderForEachRecursion(printTheNodeData, [binaryTree.root]);
+
+console.log("depth first pre order \n");
+binaryTree.preOrderForEach(printTheNodeData, binaryTree.root);
+
+console.log("depth first in order \n");
+binaryTree.inOrderForEach(printTheNodeData, binaryTree.root);
+
+console.log("depth first post order \n");
+binaryTree.postOrderForEach(printTheNodeData, binaryTree.root);
