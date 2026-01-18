@@ -160,6 +160,35 @@ class Tree {
 
     return pointer;
   }
+
+  levelOrderForEachIteration(callback) {
+    if (callback === null) throw new Error("Callback function is null!. \n");
+
+    const queue = [];
+    queue.push(this.root);
+
+    while (queue.length !== 0) {
+      const currentNode = queue.shift();
+      callback(currentNode);
+
+      if (currentNode.leftChildren) queue.push(currentNode.leftChildren);
+      if (currentNode.rightChildren) queue.push(currentNode.rightChildren);
+    }
+  }
+
+  levelOrderForEachRecursion(callback, queue) {
+    if (callback === null) throw new Error("Callback function is null!. \n");
+    if (queue.length === 0) return;
+
+    const currentQueue = [...queue];
+    const firstNode = currentQueue.shift();
+
+    callback(firstNode);
+    if (firstNode.leftChildren) currentQueue.push(firstNode.leftChildren);
+    if (firstNode.rightChildren) currentQueue.push(firstNode.rightChildren);
+
+    this.levelOrderForEachRecursion(callback, currentQueue);
+  }
 }
 
 export default Tree;

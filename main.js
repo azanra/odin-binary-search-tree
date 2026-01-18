@@ -13,3 +13,12 @@ binaryTree.prettyPrint(binaryTree.root);
 
 binaryTree.find(7);
 
+const printTheNodeData = (node) => {
+  if (node === null) return;
+  console.log(node.data);
+};
+
+console.log("level order iteration \n");
+binaryTree.levelOrderForEachIteration(printTheNodeData);
+console.log("level order recursion \n");
+binaryTree.levelOrderForEachRecursion(printTheNodeData, [binaryTree.root]);
