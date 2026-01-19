@@ -216,6 +216,32 @@ class Tree {
     this.postOrderForEach(callback, root.rightChildren);
     callback(root);
   }
+
+  height(value) {
+    let pointer = this.root;
+    while (pointer !== null && pointer?.data !== value) {
+      if (pointer.data > value) {
+        pointer = pointer.leftChildren;
+      } else if (pointer.data < value) {
+        pointer = pointer.rightChildren;
+      }
+    }
+
+    if (pointer === null) return null;
+
+    const nodeHeight = this.heightTraverse(pointer, value);
+    console.log(`Height of the node is ${nodeHeight} \n`);
+    return nodeHeight;
+  }
+
+  heightTraverse(root, value) {
+    if (root === null) return -1;
+
+    const leftHeight = this.heightTraverse(root.leftChildren, value);
+    const rightHeight = this.heightTraverse(root.rightChildren, value);
+
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
 }
 
 export default Tree;
