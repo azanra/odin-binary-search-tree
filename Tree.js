@@ -242,6 +242,25 @@ class Tree {
 
     return Math.max(leftHeight, rightHeight) + 1;
   }
+
+  depth(value) {
+    let depthHeight = 0;
+    let pointer = this.root;
+
+    while (pointer !== null && pointer.data !== value) {
+      if (pointer.data > value) {
+        depthHeight++;
+        pointer = pointer.leftChildren;
+      } else if (pointer.data < value) {
+        depthHeight++;
+        pointer = pointer.rightChildren;
+      }
+    }
+
+    if (pointer === null) return null;
+    console.log(`Depth of the node is ${depthHeight} \n`);
+    return depthHeight;
+  }
 }
 
 export default Tree;
