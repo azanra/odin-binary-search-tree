@@ -229,16 +229,16 @@ class Tree {
 
     if (pointer === null) return null;
 
-    const nodeHeight = this.heightTraverse(pointer, value);
+    const nodeHeight = this.heightTraverse(pointer);
     console.log(`Height of the node is ${nodeHeight} \n`);
     return nodeHeight;
   }
 
-  heightTraverse(root, value) {
+  heightTraverse(root) {
     if (root === null) return -1;
 
-    const leftHeight = this.heightTraverse(root.leftChildren, value);
-    const rightHeight = this.heightTraverse(root.rightChildren, value);
+    const leftHeight = this.heightTraverse(root.leftChildren);
+    const rightHeight = this.heightTraverse(root.rightChildren);
 
     return Math.max(leftHeight, rightHeight) + 1;
   }
@@ -260,6 +260,34 @@ class Tree {
     if (pointer === null) return null;
     console.log(`Depth of the node is ${depthHeight} \n`);
     return depthHeight;
+  }
+
+  isBalanced() {
+    this.prettyPrint(this.root);
+    let isTreeBalanced = true;
+    const queue = [];
+    queue.push(this.root);
+
+    while (queue.length !== 0) {
+      const currentNode = queue.shift();
+
+      const leftChildrenHeight = this.heightTraverse(currentNode.leftChildren);
+      currentNode.leftChildren && queue.push(currentNode.leftChildren);
+
+      const rightChildrenHeight = this.heightTraverse(
+        currentNode.rightChildren,
+      );
+      currentNode.rightChildren && queue.push(currentNode.rightChildren);
+
+      const isCurrentNodeBalanced =
+        leftChildrenHeight - rightChildrenHeight <= 1;
+
+      if (!isCurrentNodeBalanced) {
+        isTreeBalanced = false;
+      }
+    }
+
+    console.log(`Is the tree balanced: ${isTreeBalanced}! \n`);
   }
 }
 

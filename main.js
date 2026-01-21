@@ -32,5 +32,7 @@ binaryTree.inOrderForEach(printTheNodeData, binaryTree.root);
 console.log("depth first post order \n");
 binaryTree.postOrderForEach(printTheNodeData, binaryTree.root);
 
-binaryTree.height(4);
-binaryTree.depth(4);
+// binaryTree.height(4);
+// binaryTree.depth(4);
+
+binaryTree.isBalanced();
