@@ -289,6 +289,26 @@ class Tree {
 
     console.log(`Is the tree balanced: ${isTreeBalanced}! \n`);
   }
+
+  rebalance() {
+    const queue = [];
+    const newTreeArray = [];
+    console.log(this.treeArray);
+
+    queue.push(this.root);
+    while (queue.length !== 0) {
+      const currentNode = queue.shift();
+
+      newTreeArray.push(currentNode.data);
+
+      currentNode.leftChildren && queue.push(currentNode.leftChildren);
+      currentNode.rightChildren && queue.push(currentNode.rightChildren);
+    }
+
+    this.treeArray = newTreeArray;
+    this.root = this.buildTree(this.treeArray);
+    this.prettyPrint(this.root);
+  }
 }
 
 export default Tree;
