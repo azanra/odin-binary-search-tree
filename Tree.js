@@ -307,7 +307,6 @@ class Tree {
 
     this.treeArray = newTreeArray;
     this.root = this.buildTree(this.treeArray);
-    this.prettyPrint(this.root);
   }
 }
 
