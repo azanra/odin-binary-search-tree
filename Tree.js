@@ -278,9 +278,9 @@ class Tree {
         currentNode.rightChildren,
       );
       currentNode.rightChildren && queue.push(currentNode.rightChildren);
+      const difference = Math.abs(leftChildrenHeight - rightChildrenHeight);
 
-      const isCurrentNodeBalanced =
-        leftChildrenHeight - rightChildrenHeight <= 1;
+      const isCurrentNodeBalanced = difference <= 1;
 
       if (!isCurrentNodeBalanced) {
         isTreeBalanced = false;
